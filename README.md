@@ -6,14 +6,13 @@ Projet utilisé à des fins de démonstration de certaines capacités Spring
 
 * Utilisation de l'AOP
 	+ Avec AspectJ
-		+Interception avec annotations
+		-Interception avec annotations
 
 * PostProcessor
-	+ Exemple d'un BeanDefinitionRegistryPostProcessor		
+	+ Exemple d'un BeanDefinitionRegistryPostProcessor	
+	+ Exemple d'un BeanFactoryPostProcessor	
 		
 TODO
-
-* BeanFactoryPostProcessor
 
 * BeanPostProcessor
 
