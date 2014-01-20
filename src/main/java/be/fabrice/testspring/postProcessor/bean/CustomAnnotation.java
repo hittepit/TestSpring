@@ -1,4 +1,4 @@
-package be.fabrice.testspring.postProcessor.factory;
+package be.fabrice.testspring.postProcessor.bean;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

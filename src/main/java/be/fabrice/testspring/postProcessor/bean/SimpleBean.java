@@ -1,4 +1,6 @@
-package be.fabrice.testspring.postProcessor.factory;
+package be.fabrice.testspring.postProcessor.bean;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
@@ -6,6 +8,11 @@ import org.springframework.stereotype.Component;
 @CustomAnnotation("toto")
 public class SimpleBean {
 	private String value;
+	
+	@PostConstruct
+	public void init(){
+		value = value.toUpperCase();
+	}
 
 	public String getValue() {
 		return value;

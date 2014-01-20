@@ -8,7 +8,6 @@
     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd" 
     default-autowire="byName">
 
-	<context:component-scan base-package="be.fabrice.testspring.postProcessor.definitionRegistry">
-		<context:exclude-filter type="annotation" expression="be.fabrice.testspring.utils.MayBeExcluded"/>
-	</context:component-scan>
+	<context:component-scan base-package="be.fabrice.testspring.postProcessor.factory" />
+
 </beans>

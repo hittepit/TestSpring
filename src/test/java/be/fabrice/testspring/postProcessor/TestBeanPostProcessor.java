@@ -7,18 +7,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-import be.fabrice.testspring.postProcessor.factory.SimpleBean;
+import be.fabrice.testspring.postProcessor.bean.SimpleBean;
 
 
 
-@ContextConfiguration(locations="classpath:postProcessor/test-spring.xml")
-public class TestFactoryBeanPostProcessor extends AbstractTestNGSpringContextTests{
+
+@ContextConfiguration(locations="classpath:postProcessor/test-beanPostProcessor-spring.xml")
+public class TestBeanPostProcessor extends AbstractTestNGSpringContextTests{
 	@Autowired
 	private SimpleBean simpleBean;
 	
 	@Test
 	public void testSimpleBeanIsInjected(){
 		String value = simpleBean.getValue();
-		assertEquals(value, "toto");
+		assertEquals(value, "TOTO0");
 	}
 }
