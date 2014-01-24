@@ -21,7 +21,7 @@ public class RuleBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 					beanDefinition.setScope(annotated.singleton()?"singleton":"prototype");
 				}
 			} catch (ClassNotFoundException e) {
-				throw new BeansException("Class for bean "+name+" nor found (really?)",e){};
+				throw new BeansException("Class for bean "+name+" not found (really?)",e){};
 			}
 		}
 	}
