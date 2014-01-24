@@ -11,7 +11,7 @@ Projet utilisé à des fins de démonstration de certaines capacités Spring
 
 * PostProcessor
 	+ Exemple d'un BeanDefinitionRegistryPostProcessor	
-	+ Exemple d'un BeanFactoryPostProcessor	
+	+ Exemple d'un BeanFactoryPostProcessor: cas d'utilisation qui pourrait être réel, démonstration d'un stéréotype custom également
 	+ Exemple d'un BeanPostProcessor
 		
 TODO

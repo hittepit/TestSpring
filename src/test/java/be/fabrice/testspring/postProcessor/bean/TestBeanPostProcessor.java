@@ -1,4 +1,4 @@
-package be.fabrice.testspring.postProcessor;
+package be.fabrice.testspring.postProcessor.bean;
 
 import static org.testng.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ import be.fabrice.testspring.postProcessor.bean.SimpleBean;
 
 
 
-@ContextConfiguration(locations="classpath:postProcessor/test-beanPostProcessor-spring.xml")
+@ContextConfiguration(locations="classpath:postProcessor/bean/test-beanPostProcessor-spring.xml")
 public class TestBeanPostProcessor extends AbstractTestNGSpringContextTests{
 	@Autowired
 	private SimpleBean simpleBean;

@@ -1,4 +1,4 @@
-package be.fabrice.testspring.postProcessor;
+package be.fabrice.testspring.postProcessor.definitionRegistry;
 
 import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertSame;
@@ -7,13 +7,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
 
-import be.fabrice.testspring.postProcessor.factory.SuspectedIncorrectService;
+import be.fabrice.testspring.postProcessor.definitionRegistry.SuspectedIncorrectService;
 
-public class TestBeanFactoryPostProcessor {
+public class TestBeanDefinitionRegistryPostProcessor {
 
 	@Test
 	public void testIncorrectConfigurationIsPrototype(){
-		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:postProcessor/test-withoutFactoryPostProcessor-spring.xml");
+		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:postProcessor/definitionRegistry/test-withoutDefinitionPostProcessor-spring.xml");
 		SuspectedIncorrectService service1 = (SuspectedIncorrectService) applicationContext.getBean("suspectedIncorrectService");
 		SuspectedIncorrectService service2 = (SuspectedIncorrectService) applicationContext.getBean("suspectedIncorrectService");
 		
@@ -23,7 +23,7 @@ public class TestBeanFactoryPostProcessor {
 
 	@Test
 	public void testIncorrectConfigurationIsCorrectedByPostProcessor(){
-		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:postProcessor/test-factoryPostProcessor-spring.xml");
+		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:postProcessor/definitionRegistry/test-definitionPostProcessor-spring.xml");
 		SuspectedIncorrectService service1 = (SuspectedIncorrectService) applicationContext.getBean("suspectedIncorrectService");
 		SuspectedIncorrectService service2 = (SuspectedIncorrectService) applicationContext.getBean("suspectedIncorrectService");
 		

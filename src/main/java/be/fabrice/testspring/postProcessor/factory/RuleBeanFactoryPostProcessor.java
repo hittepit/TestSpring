@@ -5,13 +5,9 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import be.fabrice.testspring.utils.MayBeExcluded;
 
 @Component
-@MayBeExcluded
-public class SampleFactoryBeanPostProcessor implements BeanFactoryPostProcessor {
+public class RuleBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -20,12 +16,12 @@ public class SampleFactoryBeanPostProcessor implements BeanFactoryPostProcessor 
 			BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);
 			try {
 				Class<?> clazz = Class.forName(beanDefinition.getBeanClassName());
-				Service annotated = clazz.getAnnotation(Service.class);
+				Rule annotated = clazz.getAnnotation(Rule.class);
 				if(annotated!=null){
-					beanDefinition.setScope("singleton");
+					beanDefinition.setScope(annotated.singleton()?"singleton":"prototype");
 				}
 			} catch (ClassNotFoundException e) {
-				throw new BeansException("Class for bean "+name+" nor found",e){};
+				throw new BeansException("Class for bean "+name+" nor found (really?)",e){};
 			}
 		}
 	}
