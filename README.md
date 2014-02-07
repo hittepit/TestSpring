@@ -6,8 +6,7 @@ Projet utilisé à des fins de démonstration de certaines capacités Spring
 
 * Utilisation de l'AOP
 	+ Avec AspectJ
-		
-		Interception avec annotations
+		- Interception avec annotations
 
 * PostProcessor
 	+ Exemple d'un BeanDefinitionRegistryPostProcessor	
@@ -17,5 +16,7 @@ Projet utilisé à des fins de démonstration de certaines capacités Spring
 TODO
 
 * Custom stereotypes (http://stackoverflow.com/questions/7846103/customised-annotation-in-spring)
+
+* Injections par type, par nom, @Autowired, @Qualifier
 
 * Documentation tudju... 
