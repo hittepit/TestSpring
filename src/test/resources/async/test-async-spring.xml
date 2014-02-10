@@ -10,8 +10,14 @@
 
 	<context:component-scan base-package="be.fabrice.testspring.async" />
 	
-	<task:scheduler id="scheduler" pool-size="5"/>
+	<!-- Crée un ThreadPoolTaskExecutor -->
 	<task:executor id="executor" pool-size="10"/>
 	
+	<task:annotation-driven executor="executor" />
+	
+	<!--
+	Dans le cas présent, il n'est pas nécesaire de définir un scheduler, juste un executor 
+	<task:scheduler id="scheduler" pool-size="5"/>
 	<task:annotation-driven executor="executor" scheduler="scheduler"/>
+	 -->
 </beans>
