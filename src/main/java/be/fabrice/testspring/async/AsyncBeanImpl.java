@@ -1,9 +1,7 @@
 package be.fabrice.testspring.async;
 
 import java.math.BigInteger;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -17,11 +15,24 @@ public class AsyncBeanImpl implements AsyncBean {
 		return new AsyncResult<BigInteger>(fact(n));
 	}
 	
+	@Async
+	public Future<Integer> infiniteLoop(){
+		return new AsyncResult<Integer>(loop());
+	}
+	
 	private BigInteger fact(BigInteger n){
 		if(n.equals(BigInteger.ZERO)){
 			return BigInteger.ONE;
 		} else {
 			return n.multiply(fact(n.subtract(BigInteger.ONE)));
 		}
+	}
+	
+	private Integer loop(){
+		int i = 1;
+		while(i!=0){
+			i = -i;
+		}
+		return i;
 	}
 }

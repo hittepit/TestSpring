@@ -7,7 +7,10 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import java.math.BigInteger;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,5 +36,24 @@ public class TestAsyncExecution extends AbstractTestNGSpringContextTests{
 		assertNotNull(result,"Result cannot be null");
 		assertTrue(r.isDone(),"Now, calculation is over");
 		assertEquals(result, response,"Result must be correct");
+	}
+	
+	@Test
+	public void testAsyncCallOfInfiniteLoopMethodIsPossibleAndWillTimeout() {
+		Future<Integer> fi = asyncBean.infiniteLoop();
+		try {
+			Integer i = fi.get(1,TimeUnit.SECONDS);
+			fail("Doit lancer une exception");
+		} catch (InterruptedException e) {
+			fail("Pas la bonne exception");
+		} catch (ExecutionException e) {
+			fail("Pas la bonne exception");
+		} catch (TimeoutException e) {
+			//ok
+			assertFalse(fi.isDone());
+			assertFalse(fi.isCancelled());
+			fi.cancel(true); //La boucle tourne toujours
+			assertTrue(fi.isCancelled());
+		}
 	}
 }
