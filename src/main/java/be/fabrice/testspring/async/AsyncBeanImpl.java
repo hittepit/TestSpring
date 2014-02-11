@@ -12,6 +12,17 @@ public class AsyncBeanImpl implements AsyncBean {
 	
 	@Async
 	public Future<BigInteger> asyncFact(final BigInteger n) {
+		BigInteger accu = BigInteger.ONE;
+		BigInteger counter = BigInteger.ONE;
+		while(counter.compareTo(n) != 1){
+			accu = accu.multiply(counter);
+			counter = counter.add(BigInteger.ONE);
+		}
+		return new AsyncResult<BigInteger>(accu);
+	}
+	
+	@Async
+	public Future<BigInteger> asyncRecursiveFact(final BigInteger n) {
 		return new AsyncResult<BigInteger>(fact(n));
 	}
 	
