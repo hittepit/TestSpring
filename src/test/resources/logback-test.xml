@@ -6,6 +6,8 @@
 	</layout>
   </appender>
   
+  <logger name="be.fabrice.testspring.async.TestAsyncExecution" level="INFO" /> 
+  
   <root>
 	<level value="ERROR" />
 	<appender-ref ref="STDOUT" />
