@@ -3,6 +3,7 @@
 .project
 .settings
 .externalToolBuilders
+.idea
 
 target/
 test-output/

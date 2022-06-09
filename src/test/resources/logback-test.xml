@@ -6,9 +6,11 @@
 	</layout>
   </appender>
   
-  <logger name="be.fabrice.testspring.async.TestAsyncExecution" level="INFO" /> 
-  
-  <root>
+  <logger name="be.fabrice.testspring.async.TestAsyncExecution" level="INFO" />
+    <logger name="be.fabrice.testspring.circular.TestCircular" level="INFO" />
+
+    <logger name="org.springframework" level="DEBUG" />
+    <root>
 	<level value="ERROR" />
 	<appender-ref ref="STDOUT" />
   </root>

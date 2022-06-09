@@ -4,23 +4,26 @@ import java.math.BigInteger;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AsyncBeanImpl implements AsyncBean {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AsyncBeanImpl.class);
 	
 	@Async
 	public Future<BigInteger> asyncFact(final BigInteger n) {
 		BigInteger accu = BigInteger.ONE;
 		BigInteger counter = BigInteger.ONE;
-		while(counter.compareTo(n) != 1){
+		while(counter.compareTo(n) > 0){
 			accu = accu.multiply(counter);
 			counter = counter.add(BigInteger.ONE);
 		}
 		Future<BigInteger> f = new AsyncResult<BigInteger>(accu);
-		System.out.println("Envoyé par bean: "+f);
+		LOGGER.info("Envoyé par bean: {}", f);
 		return f;
 	}
 	
