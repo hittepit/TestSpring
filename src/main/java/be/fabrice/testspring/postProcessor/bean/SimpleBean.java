@@ -1,7 +1,7 @@
 package be.fabrice.testspring.postProcessor.bean;
 
-import javax.annotation.PostConstruct;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component

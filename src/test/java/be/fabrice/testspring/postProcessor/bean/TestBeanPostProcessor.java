@@ -1,25 +1,22 @@
 package be.fabrice.testspring.postProcessor.bean;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.Test;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import be.fabrice.testspring.postProcessor.bean.SimpleBean;
-
-
-
-
-@ContextConfiguration(locations="classpath:postProcessor/bean/test-beanPostProcessor-spring.xml")
-public class TestBeanPostProcessor extends AbstractTestNGSpringContextTests{
+@SpringJUnitConfig(locations="classpath:postProcessor/bean/test-beanPostProcessor-spring.xml")
+class TestBeanPostProcessor {
 	@Autowired
 	private SimpleBean simpleBean;
 	
 	@Test
-	public void testSimpleBeanIsInjected(){
+	void testSimpleBeanIsInjected(){
 		String value = simpleBean.getValue();
-		assertEquals(value, "TOTO0");
+		assertEquals("TOTO0", value);
 	}
 }

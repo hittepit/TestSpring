@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-  <appender name="STDOUT"  class="ch.qos.logback.core.ConsoleAppender">
-	<layout class="ch.qos.logback.classic.PatternLayout">
-  	<Pattern>Tests spring - %d{HH:mm:ss.SSS} %-5level %logger{55} - %msg%n</Pattern>
-	</layout>
-  </appender>
-  
-  <logger name="be.fabrice.testspring.async.TestAsyncExecution" level="INFO" />
-    <logger name="be.fabrice.testspring.circular.TestCircular" level="INFO" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>Tests spring - %d{HH:mm:ss.SSS} %-5level %logger{55} - %msg%n</Pattern>
+        </layout>
+    </appender>
 
-    <logger name="org.springframework" level="DEBUG" />
+    <logger name="be.fabrice.testspring.async.TestAsyncExecution" level="INFO"/>
+    <logger name="be.fabrice.testspring.circular.TestCircular" level="INFO"/>
+
     <root>
-	<level value="ERROR" />
-	<appender-ref ref="STDOUT" />
-  </root>
+        <level value="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
 </configuration>

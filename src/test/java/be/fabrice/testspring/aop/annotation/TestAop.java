@@ -1,28 +1,30 @@
 package be.fabrice.testspring.aop.annotation;
 
-import static org.testng.Assert.assertEquals;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.Test;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations="classpath:/aop/annotation/test-aop-spring.xml")
-public class TestAop extends AbstractTestNGSpringContextTests{
+class TestAop {
 	@Autowired
 	private SimpleBean simpleBean;
 	
 	@Test
-	public void testProxiedAdd(){
+	void testProxiedAdd(){
 		int response = simpleBean.add(6,7);
 		assertEquals(response, -1);
-		assertEquals(simpleBean.originalResponseWas(),13);
+		assertEquals(13, simpleBean.originalResponseWas());
 	}
 	
 	@Test
-	public void testNonProxiedMult(){
+	void testNonProxiedMult(){
 		int response = simpleBean.mult(6,7);
-		assertEquals(response, 42);
-		assertEquals(simpleBean.originalResponseWas(),42);
+		assertEquals(42, response);
+		assertEquals(42, simpleBean.originalResponseWas());
 	}
 }

@@ -1,12 +1,11 @@
-package be.fabrice.testspring.circular.one.not.proxied;
+package be.fabrice.testspring.circular.setters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-@Component
-public class ServiceTroisImpl implements ServiceTrois{
-    @Autowired
+@Component("serviceTroisSetter")
+public class ServiceTroisImpl implements ServiceTrois {
     private ServiceUn serviceUn;
 
     @Override
@@ -18,5 +17,10 @@ public class ServiceTroisImpl implements ServiceTrois{
     @Async
     public void asyncMethod() {
 
+    }
+
+    @Autowired
+    public void setServiceUn(ServiceUn serviceUn) {
+        this.serviceUn = serviceUn;
     }
 }

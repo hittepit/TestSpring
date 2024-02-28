@@ -1,44 +1,45 @@
 package be.fabrice.testspring.async;
 
 import java.math.BigInteger;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AsyncBeanImpl implements AsyncBean {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AsyncBeanImpl.class);
-	
 	@Async
 	public Future<BigInteger> asyncFact(final BigInteger n) {
 		BigInteger accu = BigInteger.ONE;
 		BigInteger counter = BigInteger.ONE;
-		while(counter.compareTo(n) > 0){
+		while(counter.compareTo(n) < 0){
 			accu = accu.multiply(counter);
 			counter = counter.add(BigInteger.ONE);
 		}
-		Future<BigInteger> f = new AsyncResult<BigInteger>(accu);
-		LOGGER.info("Envoyé par bean: {}", f);
-		return f;
+		final CompletableFuture<BigInteger> future = new CompletableFuture<>();
+		future.complete(accu);
+		return future;
 	}
 	
 	@Async
 	public Future<BigInteger> asyncRecursiveFact(final BigInteger n) throws InterruptedException, ExecutionException {
+		final CompletableFuture<BigInteger> future = new CompletableFuture<>();
 		if(n.equals(BigInteger.ZERO)){
-			return new AsyncResult<BigInteger>(BigInteger.ONE);
+			future.complete(BigInteger.ONE);
 		} else {
-			return new AsyncResult<BigInteger>(n.multiply(asyncRecursiveFact(n.subtract(BigInteger.ONE)).get()));
+			future.complete(n.multiply(asyncRecursiveFact(n.subtract(BigInteger.ONE)).get()));
 		}
+		return future;
 	}
 	
 	@Async
 	public Future<BigInteger> asyncRecursiveFactOther(final BigInteger n) {
-		return new AsyncResult<BigInteger>(fact(n));
+		final CompletableFuture<BigInteger> future = new CompletableFuture<>();
+		future.complete(fact(n));
+		return future;
 	}
 	
 	private BigInteger fact(BigInteger n){
@@ -51,7 +52,9 @@ public class AsyncBeanImpl implements AsyncBean {
 	
 	@Async
 	public Future<Integer> infiniteLoop(){
-		return new AsyncResult<Integer>(loop());
+		final CompletableFuture<Integer> future = new CompletableFuture<>();
+		future.complete(loop());
+		return future;
 	}
 	
 	private Integer loop(){

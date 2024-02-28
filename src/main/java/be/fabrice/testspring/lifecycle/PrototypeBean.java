@@ -3,16 +3,15 @@ package be.fabrice.testspring.lifecycle;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
 public class PrototypeBean {
-	private List<String> operations = new ArrayList<String>(); 
+	private List<String> operations = new ArrayList<>();
 	
 	private InjectedBean injectedBean;
 	

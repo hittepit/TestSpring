@@ -1,21 +1,24 @@
 package be.fabrice.testspring.postProcessor.factory;
 
-import static org.testng.Assert.assertNotSame;
-import static org.testng.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.Test;
 
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations="classpath:postProcessor/factory/test-factoryPostProcessor-spring.xml")
-public class TestRuleBeanFactoryPostProcessor extends AbstractTestNGSpringContextTests{
+class TestRuleBeanFactoryPostProcessor {
 	@Autowired
 	private ApplicationContext applicationContext;
 	
 	@Test
-	public void testBadlyConfiguredRuleBecameCorrect(){
+	void testBadlyConfiguredRuleBecameCorrect(){
 		BadlyConfiguredRule rule1 = (BadlyConfiguredRule) applicationContext.getBean("badlyConfiguredRule");
 		BadlyConfiguredRule rule2 = (BadlyConfiguredRule) applicationContext.getBean("badlyConfiguredRule");
 		
@@ -23,7 +26,7 @@ public class TestRuleBeanFactoryPostProcessor extends AbstractTestNGSpringContex
 	}
 	
 	@Test
-	public void testCorrectRuleRemainedCorrect(){
+	void testCorrectRuleRemainedCorrect(){
 		CorrectRule rule1 = (CorrectRule) applicationContext.getBean("correctRule");
 		CorrectRule rule2 = (CorrectRule) applicationContext.getBean("correctRule");
 		
@@ -31,7 +34,7 @@ public class TestRuleBeanFactoryPostProcessor extends AbstractTestNGSpringContex
 	}
 	
 	@Test
-	public void testRealSingletonRuleRemainSingleton(){
+	void testRealSingletonRuleRemainSingleton(){
 		RealSingletonRule rule1 = (RealSingletonRule) applicationContext.getBean("realSingletonRule");
 		RealSingletonRule rule2 = (RealSingletonRule) applicationContext.getBean("realSingletonRule");
 		
@@ -39,7 +42,7 @@ public class TestRuleBeanFactoryPostProcessor extends AbstractTestNGSpringContex
 	}
 	
 	@Test
-	public void testPoorlyConfiguredSingletonRuleBecameCorrect(){
+	void testPoorlyConfiguredSingletonRuleBecameCorrect(){
 		PoorlyConfiguredRealSingletonRule rule1 = (PoorlyConfiguredRealSingletonRule) applicationContext.getBean("poorlyConfiguredRealSingletonRule");
 		PoorlyConfiguredRealSingletonRule rule2 = (PoorlyConfiguredRealSingletonRule) applicationContext.getBean("poorlyConfiguredRealSingletonRule");
 		
